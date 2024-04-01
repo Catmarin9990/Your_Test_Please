@@ -25,6 +25,10 @@ public class GameController : MonoBehaviour
 
     [NonSerialized] public DocRandomGeneration docGenerator;
 
+    [NonSerialized] public Canvas previousCanvas;
+    [NonSerialized] public GameObject previousGameObject;
+
+
     private void Awake()
     {
         docGenerator = GetComponent<DocRandomGeneration>();
@@ -44,12 +48,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        if (studentsList != 0)
-        {
-            Instantiate(studentPrefab);
-            student = FindAnyObjectByType<StudentScript>();
-        }
-        studentsList--;
+        callStudnet();
     }
 
     private void Update()
@@ -59,6 +58,20 @@ public class GameController : MonoBehaviour
             canSpawn = false;
             giveBlankTest();
         }
+    }
+
+    public void callStudnet()
+    {
+        if (studentsList != 0)
+        {
+            Instantiate(studentPrefab);
+        }
+        studentsList--;
+    }
+
+    public void addStud(StudentScript gameObject)
+    {
+        student = gameObject;
     }
 
     public void addDocument(GameObject document)
@@ -124,6 +137,18 @@ public class GameController : MonoBehaviour
         document.GetComponent<DragAndDrop>().enabled = false;
         document.GetComponent<ItemSwitch>().enabled = false;
         Destroy(document);
+        if (documents.Count == 0)
+        {
+            student.leave();
+        }
+    }
+
+    public void remuveStudent()
+    {
+        student.enabled = false;
+        Destroy(student.gameObject);
+        student = null;
+        callStudnet();
     }
 
     private void giveBlankTest()
@@ -133,8 +158,13 @@ public class GameController : MonoBehaviour
 
     public void getTests()
     {
-        StartCoroutine(student.writeTest());
-        docGenerator.getTests(ref correctTest, ref student.studTest);
-        Instantiate(correctTest);
+        if (!student.isWrited)
+        {
+            student.isWrited = true;
+            StartCoroutine(student.writeTest());
+            docGenerator.getTests(ref correctTest, ref student.studTest);
+            Instantiate(correctTest);
+        }
+
     }
 }

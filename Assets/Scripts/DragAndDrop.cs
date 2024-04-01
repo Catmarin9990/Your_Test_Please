@@ -46,20 +46,29 @@ public class DragAndDrop : MonoBehaviour
             }
             else if(c != null)
             {
-                GetComponentInChildren<Canvas>().sortingOrder++;
+                GetComponentInChildren<Canvas>().sortingOrder += 2;
+            }
+            if (c != null && c == gameController.previousCanvas)
+            {
+                gameController.previousCanvas.sortingOrder++;
             }
 
         }
-        ++layerOrder.sortingOrder;
+
+        layerOrder.sortingOrder += 2;
         SpriteRenderer spriteRenderer;
         foreach(GameObject doc in gameController.documents) { 
             if(doc != gameObject) {
                 spriteRenderer = doc.GetComponent<SpriteRenderer>();
                 spriteRenderer.sortingOrder = defaultOrder;
             }
+            if(doc == gameController.previousGameObject)
+            {
+                gameController.previousGameObject.GetComponent<SpriteRenderer>().sortingOrder++;
+            }
         }
-
-        
+        gameController.previousCanvas = GetComponentInChildren<Canvas>();
+        gameController.previousGameObject = gameObject;
     }
     private void OnMouseDrag()
     {
@@ -73,6 +82,10 @@ public class DragAndDrop : MonoBehaviour
         if (gameController.student.isDocIn && gameObject.GetComponent<ItemScript>().type == ItemScript.typeOfDoc.test)
         {
             gameController.getTests();
+            gameController.removeDocument(gameObject);
+        }
+        else if (gameController.student.isDocIn)
+        {
             gameController.removeDocument(gameObject);
         }
     }

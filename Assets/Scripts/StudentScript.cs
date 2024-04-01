@@ -10,6 +10,7 @@ public class StudentScript : MonoBehaviour
     private GameObject[] docSpawnpoint;
     [SerializeField] private GameObject[] typesOfDoc;
     [NonSerialized] public GameObject studTest;
+    [NonSerialized] public bool isWrited = false;
     [Space]
 
     private TMP_Text dialogueBox;
@@ -29,6 +30,8 @@ public class StudentScript : MonoBehaviour
     {
         docSpawnpoint = GameObject.FindGameObjectsWithTag("Respawn");
         gameController = FindAnyObjectByType<GameController>();
+
+        gameController.addStud(gameObject.GetComponent<StudentScript>());
 
         animator = GetComponent<Animator>();
         animator.SetTrigger("FadeInTrigger");
@@ -50,19 +53,28 @@ public class StudentScript : MonoBehaviour
 
     public void leave()
     {
+        animator.SetTrigger("FadeOutTrigger");
+    }
 
+    public void leaved()
+    {
+        gameController.remuveStudent();
     }
 
     private void OnTriggerEnter2D(Collider2D coll)
     {
         if(coll.gameObject.layer == docLayer)
-        isDocIn = true;
+        {
+            isDocIn = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D coll)
     {
         if (coll.gameObject.layer == docLayer)
+        {
             isDocIn = false;
+        }
     }
 
     public IEnumerator writeTest()
