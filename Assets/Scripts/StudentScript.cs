@@ -35,6 +35,7 @@ public class StudentScript : MonoBehaviour
 
         animator = GetComponent<Animator>();
         animator.SetTrigger("FadeInTrigger");
+        transform.position = this.transform.position;
     }
 
     public void giveDocs()

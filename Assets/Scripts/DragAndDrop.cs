@@ -83,6 +83,7 @@ public class DragAndDrop : MonoBehaviour
         {
             gameController.getTests();
             gameController.removeDocument(gameObject);
+            gameController.canSpawn = true;
         }
         else if (gameController.student.isDocIn)
         {

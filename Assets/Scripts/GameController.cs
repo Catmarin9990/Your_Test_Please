@@ -12,15 +12,14 @@ public class GameController : MonoBehaviour
     [NonSerialized] public List<documentClass> doc = new List<documentClass>();
 
     [Header("Students Settings")]
-    private int studentsCount = 0;
-    private int studentsList = 0;
+    [NonSerialized] public int studentsList = 0;
     [SerializeField] private GameObject studentPrefab;
     [NonSerialized] public StudentScript student;
     [Space]
 
     [Header("Tests Settings")]
     [SerializeField] private GameObject blankTestPrefab;
-    private bool canSpawn = true;
+    [NonSerialized] public bool canSpawn = true;
     private GameObject correctTest;
 
     [NonSerialized] public DocRandomGeneration docGenerator;
@@ -32,7 +31,6 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         docGenerator = GetComponent<DocRandomGeneration>();
-        studentsCount = UnityEngine.Random.Range(15, 26);
         studentsList = UnityEngine.Random.Range(20, 26);
         documentClass papers;
 
