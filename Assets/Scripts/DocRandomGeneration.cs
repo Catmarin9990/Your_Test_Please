@@ -3,21 +3,21 @@ using UnityEngine;
 
 public class DocRandomGeneration : MonoBehaviour
 {
-    private string[] engNames =
+    [NonSerialized] public string[] engNames =
         {
             "Ethan", "Olivia", "Benjamin", "Emma", "Alexander",
             "Sophia", "William", "Ava", "Daniel", "Charlotte",
             "James", "Mia", "Michael", "Emily", "Christopher",
         };
 
-    private string[] engSurnames =
+    [NonSerialized] public string[] engSurnames =
         {
             "Thompson", "Davis", "Clark", "Johnson", "Martinez",
             "White", "Carter", "Brown", "Rodriguez", "Miller",
             "Wilson", "Taylor", "Anderson", "Moore", "Garcia"
         };
 
-    private string[] armNames =
+    [NonSerialized] public string[] armNames =
     {
          "Arman", "Ani", "Gevorg", "Lilit", "Hayk",
          "Anna", "Tigran", "Siranush", "Vardan", "Nune",
@@ -29,7 +29,7 @@ public class DocRandomGeneration : MonoBehaviour
          "Narine", "Aramayis", "Liana", "Gurgen", "Anush"
     };
 
-    private string[] armSurnames =
+    [NonSerialized] public string[] armSurnames =
     {
         "Harutyunyan", "Avetisyan", "Hakobyan", "Grigoryan", "Manukyan",
         "Ghazaryan", "Petrosyan", "Mkrtchyan", "Sargsyan", "Asatryan",
@@ -41,7 +41,7 @@ public class DocRandomGeneration : MonoBehaviour
         "Sahakyan", "Karapetyan", "Hovhannisyan", "Mkrtchyan", "Avetisyan"
     };
 
-    private string[] faculty =
+    [NonSerialized] public string[] faculty =
     {
         "Arts",
         "Science",
@@ -55,7 +55,7 @@ public class DocRandomGeneration : MonoBehaviour
         "Humanities"
     };
 
-    string[] subject = {
+    [NonSerialized] public string[] subject = {
         "Math",
         "English",
         "Physics",
@@ -276,6 +276,7 @@ public class documentClass
     private string[] grades = null;
     public typeOfDoc type;
     public bool suitable;
+    public bool infoChanged;
 
     public enum typeOfDoc
     {
