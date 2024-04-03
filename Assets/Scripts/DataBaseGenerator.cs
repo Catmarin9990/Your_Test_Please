@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -15,8 +16,7 @@ public class DataBaseGenerator : MonoBehaviour
     [SerializeField] private int idChangeChance = 10;
     [SerializeField] private int facultyChangeChance = 90;
 
-    private GameObject[] inputs;
-
+    [NonSerialized] public GameObject[] inputs;
 
     void Start()
     {
@@ -28,19 +28,22 @@ public class DataBaseGenerator : MonoBehaviour
         inputs = GameObject.FindGameObjectsWithTag("Finish");
 
 
-        TMP_Text[] text = inputs[0].GetComponentsInChildren<TMP_Text>();
+        TMP_InputField[] text = inputs[0].GetComponentsInChildren<TMP_InputField>();
         int i = 1;
 
         foreach (documentClass doc in gameController.doc)
         {
             if (i < inputs.Length)
+            {
                 addToDatabase(text, doc);
-            text = inputs[i].GetComponentsInChildren<TMP_Text>();
-            i++;
+                text = inputs[i].GetComponentsInChildren<TMP_InputField>();
+                i++;
+            }
+
         }
     }
 
-    private void addToDatabase(TMP_Text[] text, documentClass doc)
+    private void addToDatabase(TMP_InputField[] text, documentClass doc)
     {
         string initials, id, faculty;
         (initials, id, faculty) = doc.getStudentId();
@@ -74,7 +77,7 @@ public class DataBaseGenerator : MonoBehaviour
             }
             else if (idChangeChance <= 50)
             {
-                id += (int.Parse(id) + 1).ToString(); ;
+                id = (int.Parse(id) + 1).ToString();
             }
             else if (idChangeChance <= 75)
             {

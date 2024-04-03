@@ -17,8 +17,6 @@ public class GameController : MonoBehaviour
     [NonSerialized] public StudentScript student;
     [Space]
 
-    [NonSerialized] public bool infoChanged;
-
     [Header("Tests Settings")]
     [SerializeField] private GameObject blankTestPrefab;
     [NonSerialized] public bool canSpawn = true;
@@ -27,8 +25,11 @@ public class GameController : MonoBehaviour
 
     [NonSerialized] public DocRandomGeneration docGenerator;
 
+    //sort settings
     [NonSerialized] public Canvas previousCanvas;
     [NonSerialized] public GameObject previousGameObject;
+
+    [NonSerialized] public DataBaseGenerator database;
 
 
     private void Awake()
@@ -49,6 +50,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        database = GameObject.FindAnyObjectByType<DataBaseGenerator>();
         callStudnet();
     }
 
@@ -133,6 +135,7 @@ public class GameController : MonoBehaviour
 
     public void removeDocument(GameObject document)
     {
+        checkEverythink(doc[0]);
         documents.Remove(document);
         document.GetComponent<ItemScript>().enabled = false;
         document.GetComponent<DragAndDrop>().enabled = false;
@@ -146,6 +149,7 @@ public class GameController : MonoBehaviour
 
     public void remuveStudent()
     {
+        Destroy(database.inputs[0]);
         student.enabled = false;
         Destroy(student.gameObject);
         student = null;
@@ -167,5 +171,21 @@ public class GameController : MonoBehaviour
             Instantiate(correctTest);
         }
 
+    }
+
+    public void checkEverythink(documentClass doc)
+    {
+        if (!doc.suitable)
+        {
+            Debug.Log("grades not enough");
+        }
+        if (doc.infoChanged)
+        {
+            Debug.Log("database was wrong");
+        }
+        if (!isTestCorrect)
+        {
+            Debug.Log("test was wrong");
+        }
     }
 }
