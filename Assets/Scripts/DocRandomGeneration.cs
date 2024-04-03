@@ -75,8 +75,7 @@ public class DocRandomGeneration : MonoBehaviour
 
     [Header("Test Settings")]
     [SerializeField] private GameObject[] correctTests;
-    [SerializeField] private GameObject[] studCorrectTests;
-    [SerializeField] private GameObject[] studWrongTests;
+    [SerializeField] private GameObject[] studTests;
 
 
     private GameController gameController;
@@ -249,18 +248,21 @@ public class DocRandomGeneration : MonoBehaviour
     public void getTests(ref GameObject correctTest, ref GameObject studTest)
     {
         correctTest = correctTests[UnityEngine.Random.Range(0, correctTests.Length)];
-
         int chance = UnityEngine.Random.Range(0, 100);
-
         if (chance <= correctChance)
         {
-            studTest = studCorrectTests[UnityEngine.Random.Range(0, studCorrectTests.Length)];
+            if (correctTest == correctTests[0]) studTest = studTests[0];
+            else
+            {
+                studTest = studTests[1];
+            }
+            gameController.isTestCorrect = true;
         }
         else
         {
-            // heto
-            studTest = studCorrectTests[UnityEngine.Random.Range(0, studCorrectTests.Length)];
-
+            if (correctTest == correctTests[1]) studTest = studTests[0];
+            else studTest = studTests[1];
+            gameController.isTestCorrect = false;
         }
     }
 }

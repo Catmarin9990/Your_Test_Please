@@ -218,9 +218,7 @@ MonoBehaviour:
   correctChance: 60
   correctTests:
   - {fileID: 2946583001864143259, guid: a80e17b9a33f54e42949a7063d18ded3, type: 3}
-  studCorrectTests:
-  - {fileID: 8963247795181898695, guid: 6a4967492ad3c0c44aa7aa5ce505a5d2, type: 3}
-  studWrongTests: []
+  studTests: []
 --- !u!1 &303571312
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject blankTestPrefab;
     [NonSerialized] public bool canSpawn = true;
     private GameObject correctTest;
+    [NonSerialized] public bool isTestCorrect;
 
     [NonSerialized] public DocRandomGeneration docGenerator;
 
