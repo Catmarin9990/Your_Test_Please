@@ -55,7 +55,8 @@ public class DocRandomGeneration : MonoBehaviour
         "Humanities"
     };
 
-    [NonSerialized] public string[] subject = {
+
+    private string[] subject = {
         "Math",
         "English",
         "Physics",

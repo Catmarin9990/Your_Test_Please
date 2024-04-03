@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour
     [NonSerialized] public StudentScript student;
     [Space]
 
+    [NonSerialized] public bool infoChanged;
+
     [Header("Tests Settings")]
     [SerializeField] private GameObject blankTestPrefab;
     [NonSerialized] public bool canSpawn = true;

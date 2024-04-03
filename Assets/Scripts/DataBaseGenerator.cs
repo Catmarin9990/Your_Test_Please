@@ -64,6 +64,7 @@ public class DataBaseGenerator : MonoBehaviour
             else
                 initials.Split(' ')[1] = gameController.docGenerator.engSurnames[UnityEngine.Random.Range(0, gameController.docGenerator.engSurnames.Length)];
             doc.infoChanged = true;
+
         }
         if (idChangeChance >= chance)
         {
@@ -89,6 +90,7 @@ public class DataBaseGenerator : MonoBehaviour
                 id = str.ToString();
             }
             doc.infoChanged = true;
+
         }
         if (facultyChangeChance < chance)
         {
@@ -96,6 +98,7 @@ public class DataBaseGenerator : MonoBehaviour
             doc.infoChanged = true;
         }
         doc.infoChanged = true;
+     
         (text[0].text, text[1].text, text[2].text) = (initials, id, faculty);
 
     }
