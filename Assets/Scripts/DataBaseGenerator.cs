@@ -55,12 +55,20 @@ public class DataBaseGenerator : MonoBehaviour
         {
             if (armChance >= 50)
             {
-                name = gameController.docGenerator.armNames[UnityEngine.Random.Range(0, gameController.docGenerator.armNames.Length)];
+                int boyChance = UnityEngine.Random.Range(1, 101);
+                if(boyChance >= 50)
+                    name = gameController.docGenerator.armBoyNames[UnityEngine.Random.Range(0, gameController.docGenerator.armBoyNames.Length)];
+                else
+                    name = gameController.docGenerator.armGrlNames[UnityEngine.Random.Range(0, gameController.docGenerator.armGrlNames.Length)];
                 initials = name + ' ' + surname;
             }
             else
             {
-                name = gameController.docGenerator.engNames[UnityEngine.Random.Range(0, gameController.docGenerator.engNames.Length)];
+                int boyChance = UnityEngine.Random.Range(1, 101);
+                if(boyChance >= 50)
+                    name = gameController.docGenerator.engBoyNames[UnityEngine.Random.Range(0, gameController.docGenerator.engBoyNames.Length)];
+                else
+                    name = gameController.docGenerator.engGrlNames[UnityEngine.Random.Range(0, gameController.docGenerator.engGrlNames.Length)];
                 initials = name + ' ' + surname;
             }
             doc.infoChanged = true;
@@ -89,17 +97,21 @@ public class DataBaseGenerator : MonoBehaviour
             }
             else if (idChangeChance <= 50)
             {
-                id = (int.Parse(id) + 1).ToString();
+                StringBuilder str = new StringBuilder(id);
+                str[UnityEngine.Random.Range(0, str.Length)] = char.Parse(UnityEngine.Random.Range(0, 9).ToString());
+                id = str.ToString();
             }
             else if (idChangeChance <= 75)
             {
                 StringBuilder str = new StringBuilder(id);
+                str[UnityEngine.Random.Range(0, str.Length)] = char.Parse(UnityEngine.Random.Range(0, 9).ToString());
                 str[UnityEngine.Random.Range(0, str.Length)] = char.Parse(UnityEngine.Random.Range(0, 9).ToString());
                 id = str.ToString();
             }
             else
             {
                 StringBuilder str = new StringBuilder(id);
+                str[UnityEngine.Random.Range(0, str.Length)] = char.Parse(UnityEngine.Random.Range(0, 9).ToString());
                 str[UnityEngine.Random.Range(0, str.Length)] = char.Parse(UnityEngine.Random.Range(0, 9).ToString());
                 str[UnityEngine.Random.Range(0, str.Length)] = char.Parse(UnityEngine.Random.Range(0, 9).ToString());
                 id = str.ToString();

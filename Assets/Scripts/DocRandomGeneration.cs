@@ -3,13 +3,17 @@ using UnityEngine;
 
 public class DocRandomGeneration : MonoBehaviour
 {
-    [NonSerialized] public string[] engNames =
+    [NonSerialized] public string[] engBoyNames =
         {
-            "Ethan", "Olivia", "Benjamin", "Emma", "Alexander",
-            "Sophia", "William", "Ava", "Daniel", "Charlotte",
-            "James", "Mia", "Michael", "Emily", "Christopher",
+            "Ethan", "Olivia", "Benjamin", "Alexander",
+            "William", "Daniel", "James", "Christopher",
         };
 
+    [NonSerialized] public string[] engGrlNames =
+    {
+            "Emma", "Sophia", "Ava", "Charlotte",
+            "Mia", "Michael", "Emily"
+        };
     [NonSerialized] public string[] engSurnames =
         {
             "Thompson", "Davis", "Clark", "Johnson", "Martinez",
@@ -17,16 +21,20 @@ public class DocRandomGeneration : MonoBehaviour
             "Wilson", "Taylor", "Anderson", "Moore", "Garcia"
         };
 
-    [NonSerialized] public string[] armNames =
+    [NonSerialized] public string[] armBoyNames =
     {
-         "Arman", "Ani", "Gevorg", "Lilit", "Hayk",
-         "Anna", "Tigran", "Siranush", "Vardan", "Nune",
-         "Artur", "Marine", "Suren", "Satenik", "Karen",
-         "Tatevik", "Gor", "Silva", "Gagik", "Gayane",
-         "Hovhannes", "Mariam", "Vahagn", "Astghik", "Aram",
-         "Anahit", "Ruben", "Lusine", "Mher", "Naira",
-         "Ashot", "Emma", "Hrayr", "Zara", "Vahan",
-         "Narine", "Aramayis", "Liana", "Gurgen", "Anush"
+         "Arman", "Gevorg", "Hayk", "Tigran", "Vardan", 
+         "Artur", "Suren", "Karen", "Gor", "Gagik", "Hovhannes", 
+         "Vahagn", "Aram", "Ruben", "Mher", "Ashot", "Hrayr", "Vahan",
+         "Aramayis", "Gurgen"
+    };
+    [NonSerialized] public string[] armGrlNames =
+    {
+         "Ani", "Lilit", "Anna", "Siranush", "Nune",
+         "Marine", "Satenik", "Tatevik", "Silva", 
+         "Gayane", "Mariam", "Astghik", "Anahit", 
+         "Lusine", "Naira", "Emma", "Zara", 
+         "Narine", "Liana",  "Anush"
     };
 
     [NonSerialized] public string[] armSurnames =
@@ -96,11 +104,19 @@ public class DocRandomGeneration : MonoBehaviour
         // name surname generate
         if (chance < engNameChance)
         {
-            initials = engNames[UnityEngine.Random.Range(0, engNames.Length)] + ' ' + engSurnames[UnityEngine.Random.Range(0, engSurnames.Length)];
+            chance = UnityEngine.Random.Range(1, 101);
+            if(chance > 50)
+            initials = engBoyNames[UnityEngine.Random.Range(0, engBoyNames.Length)] + ' ' + engSurnames[UnityEngine.Random.Range(0, engSurnames.Length)];
+            else
+                initials = engGrlNames[UnityEngine.Random.Range(0, engGrlNames.Length)] + ' ' + engSurnames[UnityEngine.Random.Range(0, engSurnames.Length)];
         }
         else
         {
-            initials = armNames[UnityEngine.Random.Range(0, armNames.Length)] + ' ' + armSurnames[UnityEngine.Random.Range(0, armSurnames.Length)];
+            chance = UnityEngine.Random.Range(1, 101);
+            if(chance >= 50)
+            initials = armBoyNames[UnityEngine.Random.Range(0, armBoyNames.Length)] + ' ' + armSurnames[UnityEngine.Random.Range(0, armSurnames.Length)];
+            else
+                initials = armGrlNames[UnityEngine.Random.Range(0, armGrlNames.Length)] + ' ' + armSurnames[UnityEngine.Random.Range(0, armSurnames.Length)];
         }
 
         // ID generation
