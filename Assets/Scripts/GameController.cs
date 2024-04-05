@@ -1,6 +1,9 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro;
+using UnityEditor.Rendering;
 using UnityEngine;
 using static documentClass;
 
@@ -15,6 +18,7 @@ public class GameController : MonoBehaviour
     [NonSerialized] public int studentsList = 0;
     [SerializeField] private GameObject studentPrefab;
     [NonSerialized] public StudentScript student;
+    [SerializeField] private Transform studentSpawnpoint;
     [Space]
 
     [Header("Tests Settings")]
@@ -31,7 +35,10 @@ public class GameController : MonoBehaviour
 
     [NonSerialized] public DataBaseGenerator database;
 
+    [SerializeField] private TMP_Text dialogueBox;
 
+    [NonSerialized] public bool playerChoice;
+    [NonSerialized] public bool isPlayerChoosed = false;
     private void Awake()
     {
         docGenerator = GetComponent<DocRandomGeneration>();
@@ -67,7 +74,7 @@ public class GameController : MonoBehaviour
     {
         if (studentsList != 0)
         {
-            Instantiate(studentPrefab);
+            Instantiate(studentPrefab, studentSpawnpoint);
         }
         studentsList--;
     }
@@ -90,15 +97,10 @@ public class GameController : MonoBehaviour
         }
         
     }
-    
-    private int docSpawned = 0;
 
     private void fillDocuments(Canvas canvas, ItemScript itemScript)
     {
         TMP_Text[] data = canvas.GetComponentsInChildren<TMP_Text>();
-        int chance = UnityEngine.Random.Range(0, 100);
-
-        
 
         if (doc[0] != null)
         {
@@ -106,7 +108,6 @@ public class GameController : MonoBehaviour
             {
                 case typeOfDoc.studentId:
                     (data[0].text, data[1].text, data[2].text) = doc[0].getStudentId();
-                    docSpawned++;
                     break;
                 case typeOfDoc.diploma:
                     
@@ -116,16 +117,10 @@ public class GameController : MonoBehaviour
                     {
                         data[i].text = grades[i - 3];
                     }
-                    docSpawned++;
                     break;
             }
         }
         itemScript.suitable = doc[0].suitable;
-        if(docSpawned == 2)
-        {
-            doc.Remove(doc[0]);
-            docSpawned = 0;
-        }
     }
 
     public void disable(Canvas c)
@@ -135,7 +130,6 @@ public class GameController : MonoBehaviour
 
     public void removeDocument(GameObject document)
     {
-        checkEverythink(doc[0]);
         documents.Remove(document);
         document.GetComponent<ItemScript>().enabled = false;
         document.GetComponent<DragAndDrop>().enabled = false;
@@ -149,7 +143,8 @@ public class GameController : MonoBehaviour
 
     public void remuveStudent()
     {
-        Destroy(database.inputs[0]);
+        checkEverythink(doc[0]);
+        database.deleteInput();
         student.enabled = false;
         Destroy(student.gameObject);
         student = null;
@@ -170,22 +165,79 @@ public class GameController : MonoBehaviour
             docGenerator.getTests(ref correctTest, ref student.studTest);
             Instantiate(correctTest);
         }
+    }
+    private List<IEnumerator> typeSentance = new List<IEnumerator>();
+    public void checkEverythink(documentClass document)
+    {
+        dialogueBox.text = "";
+        if (!isPlayerChoosed)
+        {
+            typeSentance.Add(TypeSentance("You didn't checked \n"));
+            StartCoroutine(MainCoroutine());
+        }
+        else if (playerChoice)
+        {
+            if (!document.suitable)
+            {
+                typeSentance.Add(TypeSentance("grades not enough \n"));
+            }
 
+            if (document.infoChanged)
+            {
+                string initials, id, faculty, name, surname;
+                TMP_InputField[] text = database.inputs[0].GetComponentsInChildren<TMP_InputField>();
+                initials = text[0].text;
+                id = text[1].text;
+                faculty = text[2].text;
+                name = initials.Split(' ')[0];
+                surname = initials.Split(' ')[1];
+
+                string studInitials, studIdName, studIdsurname, studId, studFaculty;
+                (studInitials, studId, studFaculty) = document.getStudentId();
+                studIdName = studInitials.Split(' ')[0];
+                studIdsurname = studInitials.Split(' ')[1];
+
+                if (studIdName.ToLower() != name.ToLower())
+                    typeSentance.Add(TypeSentance("Name was wrong \n"));
+                if (studIdsurname.ToLower() != surname.ToLower())
+                    typeSentance.Add(TypeSentance("Surname was wrong \n"));
+                if (studId != id)
+                    typeSentance.Add(TypeSentance("Id was wrong \n"));
+                if (studFaculty.ToLower() != faculty.ToLower())
+                    typeSentance.Add(TypeSentance("Faculty was wrong \n"));
+            }
+            if (!isTestCorrect)
+            {
+                typeSentance.Add(TypeSentance("test was wrong \n"));
+            }
+            StartCoroutine(MainCoroutine());
+        }
+        else if(!playerChoice)
+        {
+            if (document.suitable && !document.infoChanged && isTestCorrect)
+            {
+                typeSentance.Add(TypeSentance("Everythink was correct \n"));
+                StartCoroutine(MainCoroutine());
+            }
+        }
+        isPlayerChoosed = false;
+        doc.Remove(doc[0]);
+    }
+    private IEnumerator TypeSentance(string sentence)
+    {
+        foreach (char letter in sentence.ToCharArray())
+        {
+            dialogueBox.text += letter;
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
-    public void checkEverythink(documentClass doc)
+    private IEnumerator MainCoroutine()
     {
-        if (!doc.suitable)
+        foreach(IEnumerator IE in typeSentance)
         {
-            Debug.Log("grades not enough");
+            yield return StartCoroutine(IE);
         }
-        if (doc.infoChanged)
-        {
-            Debug.Log("database was wrong");
-        }
-        if (!isTestCorrect)
-        {
-            Debug.Log("test was wrong");
-        }
+        typeSentance.Clear();
     }
 }

@@ -298,7 +298,7 @@ public class documentClass
     public (string, string, string, string[]) getDiploma()
     {
         string name = initials.Split(' ')[0];
-        string surname = initials.Split(" ")[1];
+        string surname = initials.Split(' ')[1];
         type = typeOfDoc.diploma;
 
 

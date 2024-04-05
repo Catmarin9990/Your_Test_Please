@@ -8,6 +8,7 @@ public class StudentScript : MonoBehaviour
 
     [Header("Document Spawn Settings")]
     private GameObject[] docSpawnpoint;
+    private Transform spawnpoint;
     [SerializeField] private GameObject[] typesOfDoc;
     [NonSerialized] public GameObject studTest;
     [NonSerialized] public bool isWrited = false;
@@ -20,6 +21,7 @@ public class StudentScript : MonoBehaviour
 
     // Animation Settings
     private Animator animator;
+    private Animation animation;
 
     private GameController gameController;
 
@@ -33,22 +35,16 @@ public class StudentScript : MonoBehaviour
 
         gameController.addStud(gameObject.GetComponent<StudentScript>());
 
+        animation = GetComponent<Animation>();
         animator = GetComponent<Animator>();
         animator.SetTrigger("FadeInTrigger");
-        transform.position = this.transform.position;
     }
 
     public void giveDocs()
     {
-        int chance = 0;
-        UnityEngine.Random.Range(0, gameController.documents.Count);
         foreach (GameObject doc in typesOfDoc)
         {
-            chance = UnityEngine.Random.Range(0, 100);
-            if (chance > docNotSpawnChance)
-            {
-                Instantiate(doc, docSpawnpoint[UnityEngine.Random.Range(0, docSpawnpoint.Length)].transform);
-            }
+            Instantiate(doc, docSpawnpoint[UnityEngine.Random.Range(0, docSpawnpoint.Length)].transform);
         }
     }
 

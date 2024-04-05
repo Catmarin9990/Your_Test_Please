@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Text;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class DataBaseGenerator : MonoBehaviour
@@ -11,12 +13,12 @@ public class DataBaseGenerator : MonoBehaviour
     [Space]
 
     [Header("Chance Settings")]
-    [SerializeField] private int nameChangeChance = 5;
-    [SerializeField] private int surnameChangeChance = 95;
-    [SerializeField] private int idChangeChance = 10;
-    [SerializeField] private int facultyChangeChance = 90;
+    private int nameChangeChance = 10;
+    private int surnameChangeChance = 90;
+    private int idChangeChance = 30;
+    private int facultyChangeChance = 75;
 
-    [NonSerialized] public GameObject[] inputs;
+    [NonSerialized] public List<GameObject> inputs = new List<GameObject>();
 
     void Start()
     {
@@ -24,22 +26,15 @@ public class DataBaseGenerator : MonoBehaviour
         {
             Instantiate(dataPrefab, transform);
         }
-
-        inputs = GameObject.FindGameObjectsWithTag("Finish");
-
-
         TMP_InputField[] text = inputs[0].GetComponentsInChildren<TMP_InputField>();
-        int i = 1;
+
+        int i = 0;
 
         foreach (documentClass doc in gameController.doc)
         {
-            if (i < inputs.Length)
-            {
-                addToDatabase(text, doc);
-                text = inputs[i].GetComponentsInChildren<TMP_InputField>();
-                i++;
-            }
-
+            text = inputs[i].GetComponentsInChildren<TMP_InputField>();
+            addToDatabase(text, doc);
+            i++;
         }
     }
 
@@ -52,20 +47,37 @@ public class DataBaseGenerator : MonoBehaviour
         int armChance = UnityEngine.Random.Range(1, 101);
         int idChance = UnityEngine.Random.Range(1, 101);
 
+        string name, surname;
+        name = initials.Split(' ')[0];
+        surname = initials.Split(' ')[1];
+
         if (nameChangeChance >= chance)
         {
             if (armChance >= 50)
-                initials.Split(' ')[0] = gameController.docGenerator.armNames[UnityEngine.Random.Range(0, gameController.docGenerator.armNames.Length)];
+            {
+                name = gameController.docGenerator.armNames[UnityEngine.Random.Range(0, gameController.docGenerator.armNames.Length)];
+                initials = name + ' ' + surname;
+            }
             else
-                initials.Split(' ')[0] = gameController.docGenerator.engNames[UnityEngine.Random.Range(0, gameController.docGenerator.armNames.Length)];
+            {
+                name = gameController.docGenerator.engNames[UnityEngine.Random.Range(0, gameController.docGenerator.engNames.Length)];
+                initials = name + ' ' + surname;
+            }
             doc.infoChanged = true;
         }
         if (surnameChangeChance <= chance)
-        {
+        { 
             if (armChance > 50)
-                initials.Split(' ')[1] = gameController.docGenerator.armSurnames[UnityEngine.Random.Range(0, gameController.docGenerator.armSurnames.Length)];
+            {
+                surname = gameController.docGenerator.armSurnames[UnityEngine.Random.Range(0, gameController.docGenerator.armSurnames.Length)];
+                initials = name + ' ' + surname;
+            }
             else
-                initials.Split(' ')[1] = gameController.docGenerator.engSurnames[UnityEngine.Random.Range(0, gameController.docGenerator.engSurnames.Length)];
+            {
+                surname = gameController.docGenerator.engSurnames[UnityEngine.Random.Range(0, gameController.docGenerator.engSurnames.Length)];
+                initials = name + ' ' + surname;
+
+            }
             doc.infoChanged = true;
 
         }
@@ -97,12 +109,16 @@ public class DataBaseGenerator : MonoBehaviour
         }
         if (facultyChangeChance < chance)
         {
-            faculty = gameController.docGenerator.faculty[UnityEngine.Random.Range(0, faculty.Length)];
+            faculty = gameController.docGenerator.faculty[UnityEngine.Random.Range(0, gameController.docGenerator.faculty.Length)];
             doc.infoChanged = true;
         }
-        doc.infoChanged = true;
      
         (text[0].text, text[1].text, text[2].text) = (initials, id, faculty);
+    }
 
+    public void deleteInput()
+    {
+        Destroy(inputs[0]);
+        inputs.Remove(inputs[0]);
     }
 }
