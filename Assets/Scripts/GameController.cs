@@ -1,15 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using TMPro;
-using UnityEditor.Rendering;
 using UnityEngine;
 using static documentClass;
 
 public class GameController : MonoBehaviour
 {
-
+    // lists
     [NonSerialized] public List<GameObject> documents = new List<GameObject>();
     [NonSerialized] public List<Canvas> canvasList = new List<Canvas>();
     [NonSerialized] public List<documentClass> doc = new List<documentClass>();
@@ -39,6 +37,11 @@ public class GameController : MonoBehaviour
 
     [NonSerialized] public bool playerChoice;
     [NonSerialized] public bool isPlayerChoosed = false;
+
+    // Answer counts
+    private int correctCount = 0;
+    private int wrongCount = 0;
+
     private void Awake()
     {
         docGenerator = GetComponent<DocRandomGeneration>();
@@ -60,23 +63,13 @@ public class GameController : MonoBehaviour
         database = GameObject.FindAnyObjectByType<DataBaseGenerator>();
         callStudnet();
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K) && canSpawn)
-        {
-            canSpawn = false;
-            giveBlankTest();
-        }
-    }
-
     public void callStudnet()
     {
         if (studentsList != 0)
         {
             Instantiate(studentPrefab, studentSpawnpoint);
         }
-        studentsList--;
+        studentsList--; 
     }
 
     public void addStud(StudentScript gameObject)
@@ -152,7 +145,7 @@ public class GameController : MonoBehaviour
         callStudnet();
     }
 
-    private void giveBlankTest()
+    public void giveBlankTest()
     {
         Instantiate(blankTestPrefab);
     }
@@ -175,12 +168,14 @@ public class GameController : MonoBehaviour
         {
             typeSentance.Add(TypeSentance("You didn't checked \n"));
             StartCoroutine(MainCoroutine());
+            wrongCount++;
         }
         else if (playerChoice)
         {
             if (!document.suitable)
             {
                 typeSentance.Add(TypeSentance("grades not enough \n"));
+                wrongCount++;
             }
 
             if (document.infoChanged)
@@ -199,28 +194,59 @@ public class GameController : MonoBehaviour
                 studIdsurname = studInitials.Split(' ')[1];
 
                 if (studIdName.ToLower() != name.ToLower())
+                {
                     typeSentance.Add(TypeSentance("Name was wrong \n"));
+                    wrongCount++;
+                }
+                    
                 if (studIdsurname.ToLower() != surname.ToLower())
+                {
                     typeSentance.Add(TypeSentance("Surname was wrong \n"));
+                    wrongCount++;
+                }
+                    
                 if (studId != id)
+                {
                     typeSentance.Add(TypeSentance("Id was wrong \n"));
+                    wrongCount++;
+                }
+                    
                 if (studFaculty.ToLower() != faculty.ToLower())
+                {
                     typeSentance.Add(TypeSentance("Faculty was wrong \n"));
+                    wrongCount++;
+                }
+                    
             }
             if (!isTestCorrect)
             {
                 typeSentance.Add(TypeSentance("test was wrong \n"));
+                wrongCount++;
             }
             StartCoroutine(MainCoroutine());
         }
         else if(!playerChoice)
         {
-            if (document.suitable && !document.infoChanged && isTestCorrect)
+            bool isWrong = true;
+            if (document.suitable)
             {
+                typeSentance.Clear();
                 typeSentance.Add(TypeSentance("Everythink was correct \n"));
+                isWrong = false;
+                wrongCount++;
+            }
+            else if (student.isWrited && isTestCorrect)
+            {
+                typeSentance.Clear();
+                typeSentance.Add(TypeSentance("Everythink was correct \n"));
+                isWrong = false;
+            }
+            if (!isWrong)
+            {
                 StartCoroutine(MainCoroutine());
             }
         }
+        if (typeSentance.Count == 0) correctCount++;
         isPlayerChoosed = false;
         doc.Remove(doc[0]);
     }
