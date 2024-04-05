@@ -1,6 +1,4 @@
-using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class PrintScript : MonoBehaviour
@@ -22,11 +20,14 @@ public class PrintScript : MonoBehaviour
             GameController gameController = FindAnyObjectByType<GameController>();
             gameController.playerChoice = isAgree;
             gameController.isPlayerChoosed = true;
+            StartCoroutine(Destroy(40f));
+
         }
 
         else
         {
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
+            StartCoroutine(Destroy(5f));
         }
     }
 
@@ -48,9 +49,9 @@ public class PrintScript : MonoBehaviour
         return hit.collider.gameObject;
     }
 
-    private IEnumerator Destroy()
+    private IEnumerator Destroy(float time)
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(time);
         Destroy(gameObject);
     }
 }

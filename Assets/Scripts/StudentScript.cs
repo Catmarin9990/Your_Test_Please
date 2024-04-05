@@ -30,6 +30,7 @@ public class StudentScript : MonoBehaviour
 
     void Start()
     {
+        GetComponent<SpriteRenderer>().enabled = false;
         docSpawnpoint = GameObject.FindGameObjectsWithTag("Respawn");
         gameController = FindAnyObjectByType<GameController>();
 
@@ -38,6 +39,11 @@ public class StudentScript : MonoBehaviour
         animation = GetComponent<Animation>();
         animator = GetComponent<Animator>();
         animator.SetTrigger("FadeInTrigger");
+    }
+
+    public void SpriteOn()
+    {
+        GetComponent<SpriteRenderer>().enabled = true;
     }
 
     public void giveDocs()

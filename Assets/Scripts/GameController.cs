@@ -143,6 +143,7 @@ public class GameController : MonoBehaviour
 
     public void remuveStudent()
     {
+        student.GetComponent<SpriteRenderer>().enabled = false;
         checkEverythink(doc[0]);
         database.deleteInput();
         student.enabled = false;
