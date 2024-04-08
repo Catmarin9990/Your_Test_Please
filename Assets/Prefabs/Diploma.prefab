@@ -64,7 +64,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 100
+  m_SortingOrder: 6
   m_TargetDisplay: 0
 --- !u!114 &4611722936117210290
 MonoBehaviour:
@@ -141,7 +141,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.4796231, y: 0.31444758}
   m_AnchorMax: {x: 0.5622815, y: 0.3314949}
-  m_AnchoredPosition: {x: 74.19999, y: -6.5000153}
+  m_AnchoredPosition: {x: 74.19999, y: -3.4}
   m_SizeDelta: {x: 87.45, y: 13.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4352797285051190321
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Name
+  m_text: Geography 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
   m_sharedMaterial: {fileID: -3244237655657456731, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
@@ -199,8 +199,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -307,7 +307,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Name
+  m_text: Biology 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
   m_sharedMaterial: {fileID: -3244237655657456731, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
@@ -334,8 +334,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -411,7 +411,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.4796231, y: 0.31444758}
   m_AnchorMax: {x: 0.5622815, y: 0.3314949}
-  m_AnchoredPosition: {x: 74.19999, y: -37.700016}
+  m_AnchoredPosition: {x: 74.19998, y: -35.899998}
   m_SizeDelta: {x: 87.45, y: 13.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2764126860702472957
@@ -442,7 +442,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Name
+  m_text: Literature 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
   m_sharedMaterial: {fileID: -3244237655657456731, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
@@ -469,8 +469,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -577,7 +577,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Name
+  m_text: English 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
   m_sharedMaterial: {fileID: -3244237655657456731, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
@@ -604,8 +604,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -758,7 +758,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Name
+  m_text: History 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
   m_sharedMaterial: {fileID: -3244237655657456731, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
@@ -785,8 +785,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -893,7 +893,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Name
+  m_text: Chemistry 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
   m_sharedMaterial: {fileID: -3244237655657456731, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
@@ -920,8 +920,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1028,7 +1028,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Name
+  m_text: Math 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
   m_sharedMaterial: {fileID: -3244237655657456731, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
@@ -1055,8 +1055,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1163,7 +1163,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: School/collage
+  m_text: School
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
   m_sharedMaterial: {fileID: -3244237655657456731, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
@@ -1298,7 +1298,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Name
+  m_text: Russian 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
   m_sharedMaterial: {fileID: -3244237655657456731, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
@@ -1325,8 +1325,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1433,7 +1433,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Name
+  m_text: Health 3
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
   m_sharedMaterial: {fileID: -3244237655657456731, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
@@ -1460,8 +1460,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1568,7 +1568,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Name
+  m_text: Physics 4
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
   m_sharedMaterial: {fileID: -3244237655657456731, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
@@ -1595,8 +1595,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1703,7 +1703,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Surname
+  m_text: Hovsepyan
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
   m_sharedMaterial: {fileID: -3244237655657456731, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
@@ -1802,14 +1802,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7820474701396988589}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 10}
+  m_LocalScale: {x: 1.1131, y: 1.1131, z: 1.1131}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6436350152787717420}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &663155544784353479
 SpriteRenderer:
@@ -1851,8 +1851,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 1d7e64941107f9a47a23d0702d3ac947, type: 3}
+  m_SortingOrder: 5
+  m_Sprite: {fileID: 21300000, guid: 7dc96d301d29cab45a95b75213916624, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1870,7 +1870,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7820474701396988589}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1899,7 +1899,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.045, y: 1.0708333}
+    oldSize: {x: 3.136, y: 4.2}
     newSize: {x: 3.4086957, y: 4.5652175}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -1915,7 +1915,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7820474701396988589}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1958,7 +1958,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -2016,7 +2016,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37aa8a466800a3244a5e4930db385fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultOrder: 2
+  movementTime: 15
+  firstLayer: 5
+  defaultLayer: 2
+  isSorting: 1
 --- !u!1 &8762796488597908295
 GameObject:
   m_ObjectHideFlags: 0
@@ -2083,7 +2086,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Name
+  m_text: Emma
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}
   m_sharedMaterial: {fileID: -3244237655657456731, guid: 2a3f4bfd38fbd65439355c88f67b5cc8, type: 2}

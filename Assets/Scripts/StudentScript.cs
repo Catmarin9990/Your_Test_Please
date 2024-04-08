@@ -21,24 +21,31 @@ public class StudentScript : MonoBehaviour
 
     // Animation Settings
     private Animator animator;
-    private Animation animation;
 
     private GameController gameController;
 
     [NonSerialized] public bool isDocIn = false;
     [SerializeField] private int docLayer;
 
+    [SerializeField] private Sprite boySprite;
+    [SerializeField] private Sprite girlSprite;
+    private SpriteRenderer spriteRenderer;
+
+    [NonSerialized] public bool isWriting = false;
+
     void Start()
     {
-        GetComponent<SpriteRenderer>().enabled = false;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        spriteRenderer.enabled = false;
         docSpawnpoint = GameObject.FindGameObjectsWithTag("Respawn");
         gameController = FindAnyObjectByType<GameController>();
 
         gameController.addStud(gameObject.GetComponent<StudentScript>());
 
-        animation = GetComponent<Animation>();
         animator = GetComponent<Animator>();
         animator.SetTrigger("FadeInTrigger");
+        spriteRenderer.sprite = (gameController.doc[0].isGirl) ? girlSprite : boySprite;
     }
 
     public void SpriteOn()
@@ -82,7 +89,9 @@ public class StudentScript : MonoBehaviour
 
     public IEnumerator writeTest()
     {
-        yield return new WaitForSeconds(5f);
+        isWriting = true;
+        yield return new WaitForSeconds(3f);
+        isWriting = false;
         Instantiate(studTest, docSpawnpoint[UnityEngine.Random.Range(0, docSpawnpoint.Length)].transform);
     }
 }

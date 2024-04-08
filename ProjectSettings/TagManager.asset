@@ -3,18 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - DropValid
+  - DropInvalid
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Switch
+  - 
   - Water
   - UI
   - Papers
   - Small
   - Big
-  - 
+  - Dragging
   - 
   - 
   - 

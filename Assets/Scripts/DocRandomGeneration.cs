@@ -97,7 +97,7 @@ public class DocRandomGeneration : MonoBehaviour
 
 
     public void generateStudentInfo(ref string initials, ref string studId, ref string studFaculty,
-                                ref string[] gradeList, ref string fromWhere, ref bool suitable)
+                                ref string[] gradeList, ref string fromWhere, ref bool suitable, ref bool isGirl)
     {
         string[] from = { "School", "College" };
         int chance = UnityEngine.Random.Range(0, 100);
@@ -106,17 +106,29 @@ public class DocRandomGeneration : MonoBehaviour
         {
             chance = UnityEngine.Random.Range(1, 101);
             if(chance > 50)
-            initials = engBoyNames[UnityEngine.Random.Range(0, engBoyNames.Length)] + ' ' + engSurnames[UnityEngine.Random.Range(0, engSurnames.Length)];
+            {
+                initials = engBoyNames[UnityEngine.Random.Range(0, engBoyNames.Length)] + ' ' + engSurnames[UnityEngine.Random.Range(0, engSurnames.Length)];
+                isGirl = false;
+            }
             else
+            {
                 initials = engGrlNames[UnityEngine.Random.Range(0, engGrlNames.Length)] + ' ' + engSurnames[UnityEngine.Random.Range(0, engSurnames.Length)];
+                isGirl = true;
+            }
         }
         else
         {
             chance = UnityEngine.Random.Range(1, 101);
             if(chance >= 50)
-            initials = armBoyNames[UnityEngine.Random.Range(0, armBoyNames.Length)] + ' ' + armSurnames[UnityEngine.Random.Range(0, armSurnames.Length)];
+            {
+                initials = armBoyNames[UnityEngine.Random.Range(0, armBoyNames.Length)] + ' ' + armSurnames[UnityEngine.Random.Range(0, armSurnames.Length)];
+                isGirl = false;
+            }
             else
+            {
                 initials = armGrlNames[UnityEngine.Random.Range(0, armGrlNames.Length)] + ' ' + armSurnames[UnityEngine.Random.Range(0, armSurnames.Length)];
+                isGirl = true;
+            }
         }
 
         // ID generation
@@ -294,6 +306,7 @@ public class documentClass
     public typeOfDoc type;
     public bool suitable;
     public bool infoChanged;
+    public bool isGirl;
 
     public enum typeOfDoc
     {
@@ -302,7 +315,7 @@ public class documentClass
     }
     public void createDoc(DocRandomGeneration docRandom)
     {
-        docRandom.generateStudentInfo(ref initials, ref id, ref faculty, ref grades, ref fromWhere, ref suitable);
+        docRandom.generateStudentInfo(ref initials, ref id, ref faculty, ref grades, ref fromWhere, ref suitable, ref isGirl);
     }
 
     public (string, string, string) getStudentId()

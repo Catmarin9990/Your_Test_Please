@@ -1,16 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TestSpawner : MonoBehaviour
 {
     private GameController gameController;
+
+    private Vector3 screenPosition;
+    private Vector3 worldPosition;
+    private Vector3 mousPosOffset;
+
     private void Start()
     {
         gameController = FindAnyObjectByType<GameController>();
     }
-
-    private void OnMouseDown()
+    
+    public void spawnTest()
     {
         if (gameController.canSpawn)
         {
@@ -18,4 +21,5 @@ public class TestSpawner : MonoBehaviour
             gameController.giveBlankTest();
         }
     }
+        
 }

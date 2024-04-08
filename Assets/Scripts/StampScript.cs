@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEditor.Rendering;
@@ -14,10 +15,8 @@ public class StampScript : MonoBehaviour
     [SerializeField] private Transform printSpawnTransform;
 
 
-    private Animator animator;
-    private bool inAnim = false;
-
-    private Vector3 mousPosOffset;
+    [NonSerialized] public Animator animator;
+    [NonSerialized] public bool inAnim = false;
 
     private bool isMouseUp = false;
 
@@ -33,29 +32,6 @@ public class StampScript : MonoBehaviour
             isMouseUp = false;
     }
 
-    private Vector3 getMousePosition()
-    {
-        // Capture mouse position
-        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    }
-
-    private void OnMouseDown()
-    {
-        // Capture mouse offset
-        mousPosOffset = gameObject.transform.position - getMousePosition();
-    }
-    private void OnMouseDrag()
-    {
-        // move object with mouse
-        transform.position = getMousePosition() + mousPosOffset;
-        inAnim = true;
-    }
-    private void OnMouseUp()
-    {
-        inAnim = true;
-        animator.SetBool("IsStamping", true);
-    }
-
     public void onStamp()
     {
         animator.SetBool("IsStamping", false);
@@ -65,7 +41,6 @@ public class StampScript : MonoBehaviour
             Instantiate(denySprite, printSpawnTransform.position, Quaternion.Euler(0, 0, 0));
         else if(agreeSprite != null)
             Instantiate(agreeSprite, printSpawnTransform.position, Quaternion.Euler(0, 0, 0));
-        
         isMouseUp = true;
     }
 }

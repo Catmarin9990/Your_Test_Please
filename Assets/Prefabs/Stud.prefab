@@ -104,6 +104,8 @@ MonoBehaviour:
   - {fileID: 7820474701396988589, guid: c98a8a92532a0e84e9b8457fee62de36, type: 3}
   docNotSpawnChance: 5
   docLayer: 6
+  boySprite: {fileID: 21300000, guid: 7bb410f18219e204f8f34a15ae7b1010, type: 3}
+  girlSprite: {fileID: 21300000, guid: d7a845b280b9cdd49b30b1f3eccc8907, type: 3}
 --- !u!61 &7509942805922144255
 BoxCollider2D:
   m_ObjectHideFlags: 0

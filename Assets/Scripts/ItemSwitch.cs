@@ -47,7 +47,7 @@ public class ItemSwitch : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D coll)
     {
-        if (coll.gameObject.name.ToLower() == "table" && canSwitchToSmall)
+        if (coll.gameObject.layer == Layers.Small && canSwitchToSmall)
         {
             circleColl.enabled = true;
             boxColl.enabled = false;
@@ -57,14 +57,13 @@ public class ItemSwitch : MonoBehaviour
             rb.gravityScale = defaltGravity;
             itemSprite.sprite = itemSmallVersion;
         }
-        if (coll.gameObject.name.ToLower() == "background" && canSwitchToBig && !canSwitchToSmall)
+        if (coll.gameObject.layer == Layers.Big && canSwitchToBig && !canSwitchToSmall)
         {
             rb.velocity = new Vector2(0, 0);
             circleColl.enabled = false;
             boxColl.enabled = true;
             if (text != null)
                 text.enabled = true;
-
             rb.gravityScale = 0;
             itemSprite.sprite = itemBigVersion;
         }

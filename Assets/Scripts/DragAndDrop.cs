@@ -1,95 +1,150 @@
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 
 public class DragAndDrop : MonoBehaviour
 {
-    private Vector3 mousPosOffset;
-    
-    private GameController gameController;
-    private Rigidbody2D rb;
+    [NonSerialized] public bool isDragging = false;
 
-    // Layer Settings
-    private SpriteRenderer layerOrder;
-    [SerializeField] private int defaultOrder = 1;
+    private DragController dragController;
+
+    [Header("Position Settings")]
+    [NonSerialized] public Vector3 lastPosition;
+    private Vector3? mouvementDestination;
+    [SerializeField] private float movementTime = 15f;
+
+    private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
+    private Canvas orderLayer;
+
+    [SerializeField] private int firstLayer = 5;
+    [SerializeField] private int defaultLayer = 2;
+
+    private bool isFirst = false;
+    private bool isPrevious = false;
+    private bool isDefault = true;
+
+    public bool isSorting = true;
 
     private void Start()
     {
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        gameController = FindAnyObjectByType<GameController>();
-
-        layerOrder = spriteRenderer;
-
+        dragController = FindObjectOfType<DragController>();
+        
         rb = GetComponent<Rigidbody2D>();
-    }
-
-    
-
-    private Vector3 getMousePosition()
-    {
-        // Capture mouse position
-        return Camera.main.ScreenToWorldPoint(Input.mousePosition);
-    }
-
-    private void OnMouseDown()
-    {
-        // Capture mouse offset
-        mousPosOffset = gameObject.transform.position - getMousePosition();
-
-        // Layer Ordering
-
-        foreach (Canvas c in gameController.canvasList)
-        {   
-            if(c != null && c != GetComponentInChildren<Canvas>())
-            {
-                c.sortingOrder = defaultOrder + 1;
-            }
-            else if(c != null)
-            {
-                GetComponentInChildren<Canvas>().sortingOrder += 2;
-            }
-            if (c != null && c == gameController.previousCanvas)
-            {
-                gameController.previousCanvas.sortingOrder++;
-            }
-
-        }
-
-        layerOrder.sortingOrder += 2;
-        SpriteRenderer spriteRenderer;
-        foreach(GameObject doc in gameController.documents) { 
-            if(doc != gameObject) {
-                spriteRenderer = doc.GetComponent<SpriteRenderer>();
-                spriteRenderer.sortingOrder = defaultOrder;
-            }
-            if(doc == gameController.previousGameObject)
-            {
-                gameController.previousGameObject.GetComponent<SpriteRenderer>().sortingOrder++;
-            }
-        }
-        gameController.previousCanvas = GetComponentInChildren<Canvas>();
-        gameController.previousGameObject = gameObject;
-    }
-    private void OnMouseDrag()
-    {
-        // move object with mouse
-        transform.position = getMousePosition() + mousPosOffset;
-    }
-
-    private void OnMouseUp()
-    {
-            
-        if (gameController.student.isDocIn && gameObject.GetComponent<ItemScript>().type == ItemScript.typeOfDoc.test)
+        
+        if(GetComponent<SpriteRenderer>() != null)
         {
-            gameController.getTests();
-            gameController.removeDocument(gameObject);
-            gameController.canSpawn = true;
+            spriteRenderer = GetComponent<SpriteRenderer>();
         }
-        else if (gameController.student.isDocIn)
+
+    }
+
+    private void Update()
+    {
+        if (isSorting)
         {
-            gameController.removeDocument(gameObject);
+            if (isFirst)
+            {
+                spriteRenderer.sortingOrder = firstLayer;
+                if (orderLayer != null)
+                {
+                    orderLayer.sortingOrder = firstLayer + 1;
+                }
+            }
+            else if (isPrevious)
+            {
+                spriteRenderer.sortingOrder = defaultLayer + 1;
+                if (orderLayer != null)
+                {
+                    orderLayer.sortingOrder = defaultLayer + 2;
+                }
+                else spriteRenderer.sortingOrder = defaultLayer + 2;
+            }
+            else if (isDefault)
+            {
+                spriteRenderer.sortingOrder = defaultLayer;
+                if (orderLayer != null)
+                {
+                    orderLayer.sortingOrder = defaultLayer + 1;
+                }
+            }
+        }
+        
+    }
+
+    private void FixedUpdate()
+    {
+        if (mouvementDestination.HasValue) 
+        {
+            if (isDragging)
+            {
+                mouvementDestination = null;
+                return;
+            }
+            if(mouvementDestination == transform.position)
+            {
+                mouvementDestination = null;
+                gameObject.layer = Layers.Default;
+                return;
+            }
+            else
+            {
+                transform.position = Vector3.Lerp(transform.position, mouvementDestination.Value, movementTime * Time.deltaTime);
+            }
+
         }
     }
 
+    public void TheFirstLayer()
+    {
+        if (GetComponentInChildren<Canvas>() != null)
+        {
+            orderLayer = GetComponentInChildren<Canvas>();
+        }
+        isFirst = true;
+        isDefault = false;
+        isPrevious = false;
+        spriteRenderer.sortingOrder = firstLayer;
+        if (orderLayer != null)
+        {
+            orderLayer.sortingOrder = firstLayer + 1;
+        }
+    }
 
+    public void DefaultLayer()
+    {
+        if (GetComponentInChildren<Canvas>() != null)
+        {
+            orderLayer = GetComponentInChildren<Canvas>();
+        }
+        isFirst = false;
+        isDefault = true;
+        isPrevious = false;
+        spriteRenderer.sortingOrder = defaultLayer;
+        if (orderLayer != null)
+        {
+            orderLayer.sortingOrder = defaultLayer + 1;
+        }
+    }
+
+    public void PreviousLayer()
+    {
+        if (GetComponentInChildren<Canvas>() != null)
+        {
+            orderLayer = GetComponentInChildren<Canvas>();
+        }
+        isFirst = false;
+        isDefault = false;
+        isPrevious = true;
+        spriteRenderer.sortingOrder = defaultLayer + 1;
+        if (orderLayer != null)
+        {
+            orderLayer.sortingOrder = defaultLayer + 2;
+        }
+        else spriteRenderer.sortingOrder = defaultLayer + 2;
+    }
+
+    public void setDestination()
+    {
+        mouvementDestination = lastPosition;
+    }
 }

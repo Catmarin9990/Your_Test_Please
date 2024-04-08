@@ -27,10 +27,6 @@ public class GameController : MonoBehaviour
 
     [NonSerialized] public DocRandomGeneration docGenerator;
 
-    //sort settings
-    [NonSerialized] public Canvas previousCanvas;
-    [NonSerialized] public GameObject previousGameObject;
-
     [NonSerialized] public DataBaseGenerator database;
 
     [SerializeField] private TMP_Text dialogueBox;
@@ -45,7 +41,7 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         docGenerator = GetComponent<DocRandomGeneration>();
-        studentsList = UnityEngine.Random.Range(20, 26);
+        studentsList = UnityEngine.Random.Range(10, 16);
         documentClass papers;
 
         for (int i = 0; i < studentsList; i++)
@@ -218,9 +214,14 @@ public class GameController : MonoBehaviour
                 }
                     
             }
-            if (!isTestCorrect)
+            if (!isTestCorrect && student.isWrited)
             {
                 typeSentance.Add(TypeSentance("test was wrong \n"));
+                wrongCount++;
+            }
+            else if(!student.isWrited)
+            {
+                typeSentance.Add(TypeSentance("Student didnt write the test \n"));
                 wrongCount++;
             }
             StartCoroutine(MainCoroutine());
@@ -228,18 +229,12 @@ public class GameController : MonoBehaviour
         else if(!playerChoice)
         {
             bool isWrong = true;
-            if (document.suitable)
+            if (student.isWrited && isTestCorrect && document.suitable || document.suitable)
             {
                 typeSentance.Clear();
-                typeSentance.Add(TypeSentance("Everythink was correct \n"));
+                typeSentance.Add(TypeSentance("Everything was correct \n"));
                 isWrong = false;
                 wrongCount++;
-            }
-            else if (student.isWrited && isTestCorrect)
-            {
-                typeSentance.Clear();
-                typeSentance.Add(TypeSentance("Everythink was correct \n"));
-                isWrong = false;
             }
             if (!isWrong)
             {
@@ -249,13 +244,14 @@ public class GameController : MonoBehaviour
         if (typeSentance.Count == 0) correctCount++;
         isPlayerChoosed = false;
         doc.Remove(doc[0]);
+        canSpawn = true;
     }
     private IEnumerator TypeSentance(string sentence)
     {
         foreach (char letter in sentence.ToCharArray())
         {
             dialogueBox.text += letter;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
         }
     }
 

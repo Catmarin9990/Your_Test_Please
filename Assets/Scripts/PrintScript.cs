@@ -23,7 +23,6 @@ public class PrintScript : MonoBehaviour
             StartCoroutine(Destroy(40f));
 
         }
-
         else
         {
             gameObject.GetComponent<SpriteRenderer>().sortingOrder = 2;
@@ -41,10 +40,9 @@ public class PrintScript : MonoBehaviour
 
     private GameObject CreateRay()
     {
-        Vector2 direction = transform.right;
+        Vector2 direction = Vector2.zero;
         Vector2 origin = transform.position; 
-        float distance = 1f;
-        RaycastHit2D hit = Physics2D.Raycast(origin, direction, distance);
+        RaycastHit2D hit = Physics2D.Raycast(origin, direction);
 
         return hit.collider.gameObject;
     }
