@@ -19,7 +19,7 @@ public class DragAndDrop : MonoBehaviour
     [SerializeField] private int firstLayer = 5;
     [SerializeField] private int defaultLayer = 2;
 
-    private bool isFirst = false;
+    [NonSerialized] public bool isFirst = false;
     private bool isPrevious = false;
     private bool isDefault = true;
 

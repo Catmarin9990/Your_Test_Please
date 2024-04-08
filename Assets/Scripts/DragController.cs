@@ -101,6 +101,7 @@ public class DragController : MonoBehaviour
         {
             stamp = lastDragged.gameObject.GetComponent<StampScript>();
         }
+        if (lastDragged.isFirst) return;
         if (lastDragged.isSorting)
         {
             foreach (GameObject doc in gameController.documents)
@@ -146,12 +147,12 @@ public class DragController : MonoBehaviour
                 gameController.getTests();
                 gameController.removeDocument(lastDragged.gameObject);
             }
-            else if (gameController.student.isDocIn)
+            else if (gameController.student.isDocIn)    
             {
                 gameController.removeDocument(lastDragged.gameObject);
             }
-            previousGameObject = lastDragged.gameObject;
         }
+        previousGameObject = lastDragged.gameObject;
     }
 
     private void UpdateDragStatus(bool isDragging)
