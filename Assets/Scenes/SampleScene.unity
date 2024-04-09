@@ -256,7 +256,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 147426356}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.05, y: -8.2, z: 0}
+  m_LocalPosition: {x: -0.05, y: -11.86, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1275,11 +1275,11 @@ GameObject:
   - component: {fileID: 746447259}
   m_Layer: 0
   m_Name: barer
-  m_TagString: DropInvalid
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &746447258
 Transform:
   m_ObjectHideFlags: 0
@@ -1943,7 +1943,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -7.33, y: -1.96}
+  m_AnchoredPosition: {x: -6.76, y: -1.96}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1364432675
@@ -2423,8 +2423,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.06683415, y: 0.042891826}
   m_AnchorMax: {x: 0.93200004, y: 0.95100003}
-  m_AnchoredPosition: {x: 0.459198, y: 0}
-  m_SizeDelta: {x: 2.2, y: 0}
+  m_AnchoredPosition: {x: -3.699997, y: 0}
+  m_SizeDelta: {x: 10.52, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1493563117
 MonoBehaviour:
@@ -2906,8 +2906,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00050354004, y: 0}
-  m_SizeDelta: {x: -0.39471436, y: 0}
+  m_AnchoredPosition: {x: 3.100006, y: 0}
+  m_SizeDelta: {x: -6.59, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1706936323
 MonoBehaviour:
@@ -2949,6 +2949,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataPrefab: {fileID: 1432390211789430409, guid: f9d2e3943c3e7324d8ad31476fa8788d, type: 3}
   gameController: {fileID: 241014995}
+  studAppearance:
+  - {fileID: 21300000, guid: b6ed843862d38e2419a8b59b073e844d, type: 3}
+  - {fileID: 21300000, guid: 09e4391a0deaccb43bc66d3a51e4c544, type: 3}
 --- !u!114 &1706936325
 MonoBehaviour:
   m_ObjectHideFlags: 0

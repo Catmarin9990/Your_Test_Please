@@ -59,13 +59,18 @@ public class GameController : MonoBehaviour
         database = GameObject.FindAnyObjectByType<DataBaseGenerator>();
         callStudnet();
     }
+
     public void callStudnet()
     {
         if (studentsList != 0)
         {
             Instantiate(studentPrefab, studentSpawnpoint);
         }
-        studentsList--; 
+        else
+        {
+            typeSentance.Add(TypeSentance("Wrong answers " + wrongCount.ToString() + "\nCorrect answers " + correctCount.ToString()));
+        }
+        studentsList--;
     }
 
     public void addStud(StudentScript gameObject)

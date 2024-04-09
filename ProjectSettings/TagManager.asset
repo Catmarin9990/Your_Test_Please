@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DropValid
   - DropInvalid
+  - Image
   layers:
   - Default
   - TransparentFX

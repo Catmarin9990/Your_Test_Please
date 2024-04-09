@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DataBaseGenerator : MonoBehaviour
 {
@@ -19,26 +19,26 @@ public class DataBaseGenerator : MonoBehaviour
     private int facultyChangeChance = 75;
 
     [NonSerialized] public List<GameObject> inputs = new List<GameObject>();
-
+    [SerializeField] private Sprite[] studAppearance;
+    private GameObject[] studImages;
     void Start()
     {
         for (int j = 0; j < gameController.doc.Count; j++)
         {
             Instantiate(dataPrefab, transform);
         }
-        TMP_InputField[] text = inputs[0].GetComponentsInChildren<TMP_InputField>();
-
+        TMP_InputField[] texts = inputs[0].GetComponentsInChildren<TMP_InputField>();
+        studImages = GameObject.FindGameObjectsWithTag("Image");
         int i = 0;
-
         foreach (documentClass doc in gameController.doc)
         {
-            text = inputs[i].GetComponentsInChildren<TMP_InputField>();
-            addToDatabase(text, doc);
+            texts = inputs[i].GetComponentsInChildren<TMP_InputField>();
+            addToDatabase(texts, studImages[i].GetComponent<Image>(), doc);
             i++;
         }
     }
 
-    private void addToDatabase(TMP_InputField[] text, documentClass doc)
+    private void addToDatabase(TMP_InputField[] text, Image studImage, documentClass doc)
     {
         string initials, id, faculty;
         (initials, id, faculty) = doc.getStudentId();
@@ -50,6 +50,8 @@ public class DataBaseGenerator : MonoBehaviour
         string name, surname;
         name = initials.Split(' ')[0];
         surname = initials.Split(' ')[1];
+
+        studImage.sprite = (doc.isGirl) ? studAppearance[1] : studAppearance[0];
 
         if (nameChangeChance >= chance)
         {
