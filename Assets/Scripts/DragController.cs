@@ -80,6 +80,7 @@ public class DragController : MonoBehaviour
                     {
                         lastDragged = drag;
                         InItDrag();
+                        break;
                     }
                     else if(gameController.canSpawn && icon != null)
                     {
@@ -90,9 +91,11 @@ public class DragController : MonoBehaviour
 
         }
     }
-
+    
     private void InItDrag()
     {
+        if(lastDragged.isSorting)
+            lastDragged.audio.PlayOneShot(lastDragged.onClickSound[UnityEngine.Random.Range(0, lastDragged.onClickSound.Length)]);
 
         lastDragged.lastPosition = lastDragged.transform.position;
         mousPosOffset = lastDragged.transform.position - worldPosition;

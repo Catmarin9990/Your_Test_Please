@@ -30,6 +30,8 @@ public class StudentScript : MonoBehaviour
     [SerializeField] private Sprite boySprite;
     [SerializeField] private Sprite girlSprite;
     private SpriteRenderer spriteRenderer;
+    [SerializeField] private SpriteRenderer stickerRenderer;
+    [SerializeField] private Sprite[] stickerVersions;
 
     [NonSerialized] public bool isWriting = false;
 
@@ -37,7 +39,9 @@ public class StudentScript : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        stickerRenderer.enabled = false;
         spriteRenderer.enabled = false;
+
         docSpawnpoint = GameObject.FindGameObjectsWithTag("Respawn");
         gameController = FindAnyObjectByType<GameController>();
 
@@ -46,6 +50,7 @@ public class StudentScript : MonoBehaviour
         animator = GetComponent<Animator>();
         animator.SetTrigger("FadeInTrigger");
         spriteRenderer.sprite = (gameController.doc[0].isGirl) ? girlSprite : boySprite;
+        stickerRenderer.sprite = (gameController.doc[0].isGirl) ? stickerVersions[1] : stickerVersions[0];
     }
 
     public void SpriteOn()
@@ -93,5 +98,10 @@ public class StudentScript : MonoBehaviour
         yield return new WaitForSeconds(3f);
         isWriting = false;
         Instantiate(studTest, docSpawnpoint[UnityEngine.Random.Range(0, docSpawnpoint.Length)].transform);
+    }
+
+    public void Àpproved()
+    {
+        stickerRenderer.enabled = true;
     }
 }

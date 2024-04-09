@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
     [Header("Tests Settings")]
     [SerializeField] private GameObject blankTestPrefab;
     [NonSerialized] public bool canSpawn = true;
+
     private GameObject correctTest;
     [NonSerialized] public bool isTestCorrect;
 
@@ -69,7 +70,10 @@ public class GameController : MonoBehaviour
         else
         {
             typeSentance.Add(TypeSentance("Wrong answers " + wrongCount.ToString() + "\nCorrect answers " + correctCount.ToString()));
+            StopAllCoroutines();
+            StartCoroutine(MainCoroutine());
         }
+
         studentsList--;
     }
 
@@ -229,27 +233,26 @@ public class GameController : MonoBehaviour
                 typeSentance.Add(TypeSentance("Student didnt write the test \n"));
                 wrongCount++;
             }
-            StartCoroutine(MainCoroutine());
         }
         else if(!playerChoice)
         {
-            bool isWrong = true;
-            if (student.isWrited && isTestCorrect && document.suitable || document.suitable)
+            if (student.isWrited && isTestCorrect && document.suitable || document.suitable && !student.isWrited)
             {
                 typeSentance.Clear();
                 typeSentance.Add(TypeSentance("Everything was correct \n"));
-                isWrong = false;
                 wrongCount++;
             }
-            if (!isWrong)
-            {
-                StartCoroutine(MainCoroutine());
-            }
         }
-        if (typeSentance.Count == 0) correctCount++;
+        if (typeSentance.Count == 0 && playerChoice) { 
+            correctCount++;
+            typeSentance.Add(TypeSentance("Àpproved \n"));
+            student.Àpproved();
+        }
         isPlayerChoosed = false;
         doc.Remove(doc[0]);
         canSpawn = true;
+        StartCoroutine(MainCoroutine());
+
     }
     private IEnumerator TypeSentance(string sentence)
     {
@@ -262,9 +265,10 @@ public class GameController : MonoBehaviour
 
     private IEnumerator MainCoroutine()
     {
-        foreach(IEnumerator IE in typeSentance)
+        for(int i = 0; i < typeSentance.Count; i++)
         {
-            yield return StartCoroutine(IE);
+            if(typeSentance[i] != null)
+            yield return StartCoroutine(typeSentance[i]);
         }
         typeSentance.Clear();
     }

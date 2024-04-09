@@ -25,6 +25,9 @@ public class DragAndDrop : MonoBehaviour
 
     public bool isSorting = true;
 
+    [NonSerialized] public AudioSource audio;
+    public AudioClip[] onClickSound;
+
     private void Start()
     {
         dragController = FindObjectOfType<DragController>();
@@ -35,7 +38,7 @@ public class DragAndDrop : MonoBehaviour
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
-
+        audio = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -44,6 +47,7 @@ public class DragAndDrop : MonoBehaviour
         {
             if (isFirst)
             {
+
                 spriteRenderer.sortingOrder = firstLayer;
                 if (orderLayer != null)
                 {
